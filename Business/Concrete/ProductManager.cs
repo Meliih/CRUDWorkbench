@@ -17,16 +17,49 @@ namespace Business.Concrete
     {
 
         private IProductDal _productDal;
+        private IProductService _productService;
+        private ICategoryDal _categoryDal;
+        private ICategoryService _categoryService;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal,IProductService productService, ICategoryDal categoryDal, ICategoryService categoryService)
         {
             _productDal = productDal;
+            _productService = productService;
+            _categoryDal = categoryDal;
+            _categoryService = categoryService;
         }
 
         public IResult Add(Product product)
         {   
-            ValidationTool.Validate(new ProductValidator(), product);
+            ValidationTool.Validate(new ProductValidator(), product);            
             _productDal.Add(product);
+
+            
+            if (product.Category != null)
+            {
+                Category _category = _categoryService.GetById(product.Category.CategoryId);
+                if (_category != null )
+                { 
+                    if(_category.MinimumStockQuantity <= product.StockQuantity)
+                    {
+                        product.IsLive = true;
+                        _productDal.Update(product);
+                        return new SuccessResult(Messages.ProductAddedAndLive);
+                    }
+                    else
+                    {
+                        return new ErrorResult(Messages.ProductNotReleased);
+                    }
+                    
+                }
+                else
+                {
+                    return new ErrorResult(Messages.NoCategory);
+                }
+            }
+           
+          
+
             return new SuccessResult(Messages.ProductAdded);
         }
 
@@ -36,9 +69,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductDeleted);
         }
 
-        public IDataResult<Product> GetById(int productId)
+        public Product GetById(int productId)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == productId));
+            return _productDal.Get(p => p.Id == productId);
 
         }
 
