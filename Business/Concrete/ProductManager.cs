@@ -97,7 +97,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetListByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.Category.CategoryId == categoryId).ToList());
+            var categories = _productDal.GetList(p => p.Category.CategoryId == categoryId).ToList();
+            if (categories.Count == 0)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.NoCategory);
+            }
+            return new SuccessDataResult<List<Product>>(categories);
             
         }
     }
