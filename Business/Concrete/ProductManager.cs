@@ -17,15 +17,11 @@ namespace Business.Concrete
     {
 
         private IProductDal _productDal;
-        private IProductService _productService;
-        private ICategoryDal _categoryDal;
         private ICategoryService _categoryService;
 
-        public ProductManager(IProductDal productDal,IProductService productService, ICategoryDal categoryDal, ICategoryService categoryService)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
-            _productService = productService;
-            _categoryDal = categoryDal;
             _categoryService = categoryService;
         }
 
@@ -37,10 +33,10 @@ namespace Business.Concrete
             
             if (product.Category != null)
             {
-                Category _category = _categoryService.GetById(product.Category.CategoryId);
+                var _category = _categoryService.GetById(product.Category.CategoryId);
                 if (_category != null )
                 { 
-                    if(_category.MinimumStockQuantity <= product.StockQuantity)
+                    if(_category.Data.MinimumStockQuantity <= product.StockQuantity)
                     {
                         product.IsLive = true;
                         _productDal.Update(product);
@@ -62,17 +58,36 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.ProductAdded);
         }
-
+        public IResult Update(Product product)
+        {
+            var products = _productDal.Get(p => p.Id == product.Id);
+            if (products == null)
+            {
+                return new ErrorDataResult<Product>(Messages.NoProduct);
+            }
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUpdated);
+        }
         public IResult Delete(Product product)
         {
+            var products = _productDal.Get(p => p.Id == product.Id);
+            if (products == null)
+            {
+                return new ErrorDataResult<Product>(Messages.NoProduct);
+            }
             _productDal.Delete(product);
             return new SuccessResult(Messages.ProductDeleted);
         }
 
-        public Product GetById(int productId)
+        public IDataResult<Product> GetById(int productId)
         {
-            return _productDal.Get(p => p.Id == productId);
+            var products = _productDal.Get(p => p.Id == productId);
+            if (products == null)
+            {
+                return new ErrorDataResult<Product>(Messages.NoProduct);
+            }
 
+            return new SuccessDataResult<Product>(products);
         }
 
         public IDataResult<List<Product>> GetList()
@@ -84,12 +99,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.Category.CategoryId == categoryId).ToList());
             
-        }
-
-        public IResult Update(Product product)
-        {
-            _productDal.Update(product);
-            return new SuccessResult(Messages.ProductUpdated);
         }
     }
 }

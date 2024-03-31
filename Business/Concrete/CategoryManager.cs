@@ -35,20 +35,17 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CategoryDeleted);
         }
 
-        //public IDataResult<Category> GetById(int categoryId)
-        //{
-        //    return new SuccessDataResult<Category>(_categoryDal.Get(p => p.CategoryId == categoryId));
+        public IDataResult<Category> GetById(int categoryId)
+        {
+            return new SuccessDataResult<Category>(_categoryDal.Get(p => p.CategoryId == categoryId));
 
-        //}
+        }
 
         public IDataResult<List<Category>> GetList()
         {
             return new SuccessDataResult<List<Category>>(_categoryDal.GetList().ToList());
         }
 
-        public Category GetById(int categoryId)
-        {
-            return _categoryDal.Get(p => p.CategoryId == categoryId);
-        }
+      
     }
 }

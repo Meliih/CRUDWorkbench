@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        Product GetById(int product);
+        IDataResult<Product> GetById(int product);
         IDataResult<List<Product>> GetList();
         IDataResult<List<Product>> GetListByCategory(int categoryId);
         IResult Add(Product product);

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -69,7 +70,15 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update(Product product)
         {
+            var existingProduct = _productService.GetById(product.Id);
+
+            if (existingProduct == null)
+            {
+                return BadRequest(Messages.NoProduct);
+
+            }
             var result = _productService.Update(product);
+
             if (result.Success)
             {
                 return Ok(result.Message);
@@ -80,6 +89,12 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(Product product)
         {
+            var existingProduct = _productService.GetById(product.Id);
+            if (existingProduct == null)
+            {
+                return BadRequest(Messages.NoProduct);
+
+            }
             var result = _productService.Delete(product);
             if (result.Success)
             {
