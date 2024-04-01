@@ -14,6 +14,13 @@
     </div>
 </form>
 
+<form asp-action="GetProductsByStockRange" asp-controller="Product" method="get" class="input-group">
+    <input type="number" name="min" class="form-control" placeholder="Minimum stok">
+    <input type="number" name="max" class="form-control" placeholder="Maksimum stok">
+    <div class="input-group-append">
+        <button type="submit" class="btn btn-outline-secondary">Ara</button>
+    </div>
+</form>
 
 
 
@@ -58,7 +65,7 @@
 
 <script>
 
-    f
+    
     
     $(document).ready(function () {
         $('#searchForm').submit(function (event) {

@@ -57,5 +57,14 @@ namespace UI.Controllers
             var filteredProducts = _productService.SearchProductsByKeyword(searchKeyword);
             return View("index",filteredProducts.Data);
         }
+
+        [HttpGet]
+        public IActionResult GetProductsByStockRange(int? min , int? max)
+        {
+            // Arama anahtar kelimesine göre ürünleri filtreleme işlemi
+            var filteredProducts = _productService.GetProductsByStockRange(min,max);
+            return View("index", filteredProducts.Data);
+        }
+
     }
 }
