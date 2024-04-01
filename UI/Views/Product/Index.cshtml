@@ -1,0 +1,91 @@
+﻿@using Entities.Concrete
+@using Entities.Concrete.DTO
+@model List<ProductDTO>
+@{
+    ViewData["Title"] = "Ürün Listesi";
+}
+
+<h2>Ürün Listesi</h2>
+
+<form asp-action="SearchProducts" asp-controller="Product" method="get" class="input-group">
+    <input type="text" name="searchKeyword" class="form-control" placeholder="Ürün ara...">
+    <div class="input-group-append">
+        <button type="submit" class="btn btn-outline-secondary">Ara</button>
+    </div>
+</form>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ürün Adı</th>
+            <th>Açıklama</th>
+            <th>Stok Miktarı</th>
+            <th>Kategori</th>
+            <th>Canlı Mı?</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Title</td>
+            <td>@product.Description</td>
+            <td>@product.StockQuantity</td>
+            <td>@product.Name</td>
+            <td>@(product.IsLive ? "Evet" : "Hayır")</td>
+   
+
+
+            <td>
+                <form asp-action="Delete" asp-route-id="@product.Id" method="post" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<!-- Düzenleme Modalı -->
+
+
+
+<script>
+
+    f
+    
+    $(document).ready(function () {
+        $('#searchForm').submit(function (event) {
+            event.preventDefault(); // Formun submit işlemini engelle
+
+            // Formdaki arama anahtar kelimesini al
+            var searchKeyword = $('#searchInput').val();
+
+            // AJAX isteği gönder
+            $.ajax({
+                url: '/Products/Search', // API endpoint'i
+                type: 'GET',
+                data: { searchKeyword: searchKeyword }, // Arama anahtar kelimesini gönder
+                success: function (result) {
+                    // Tablo içeriğini güncelle
+                    $('#productTable tbody').empty(); // Tablonun içeriğini temizle
+                    result.forEach(function (product) {
+                        $('#productTable tbody').append('<tr><td>' + product.Id + '</td><td>' + product.Title + '</td><td>' + product.Description + '</td><td>' + product.StockQuantity + '</td><td>' + product.Category + '</td><td>' + (product.IsLive ? 'Evet' : 'Hayır') + '</td></tr>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>
+
+

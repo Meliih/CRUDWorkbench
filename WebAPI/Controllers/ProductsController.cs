@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Entities.Concrete;
+using Entities.Concrete.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -102,5 +103,19 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
+        [HttpGet("searchProducts")]
+        public IActionResult SearchProducts(string searchKeyword)
+        {
+            // Arama anahtar kelimesine göre ürünleri filtreleme işlemi
+            var filteredProducts = _productService.SearchProductsByKeyword(searchKeyword);
+            return Ok(filteredProducts.Data);
+        }
+
+        [HttpGet("getProductsByStockRange")]
+        public IActionResult GetProductsByStockRange(int? min, int? max)
+        {
+            var result = _productService.GetProductsByStockRange(min, max);
+            return Ok(result.Data);
+        }
     }
 }
