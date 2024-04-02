@@ -93,7 +93,9 @@
                     </form>
                 </td>
                 <td>
-                    <form method="post" asp-action="Delete" asp-controller="Category" asp-route-id="@category.CategoryId" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
+                    <form method="post" asp-action="Delete" asp-controller="Category" asp-route-id="@category.CategoryId"  onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
+                        <input type="hidden" name="CategoryId" value="@category.CategoryId" />
+
                         <button type="submit" class="btn btn-danger">Sil</button>
                     </form>
                 </td>

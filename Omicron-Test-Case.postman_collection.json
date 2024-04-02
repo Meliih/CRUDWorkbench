@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "90b9d4d1-d54f-4e81-bc11-b7a02d992cb6",
+		"name": "Omicron-Test-Case",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32154379"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Products-delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGloa2FocmFtYW40QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNZWxpaCBLYWhyYW1hbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlByb2R1Y3QuTGlzdCIsIm5iZiI6MTcwODQyOTM4MSwiZXhwIjoxNzA4NDI5OTc4LCJpc3MiOiJ3d3cubWVsaWguY29tIiwiYXVkIjoid3d3Lm1lbGloLmNvbSJ9.6ZcMwXTz22iAUwxHtkv0sxwvFx-gmpLIEuPHGed92eg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"id\" : 1018,\r\n  \"title\": \"furki\",\r\n  \"description\": \"asd\",\r\n  \"stockQuantity\": 500,\r\n  \"category\": {\r\n    \"categoryId\": 2,\r\n    \"name\": \"bilgisayar\",\r\n    \"minimumStockQuantity\": 100\r\n  },\r\n  \"isLive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}Products/delete",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products-update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGloa2FocmFtYW40QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNZWxpaCBLYWhyYW1hbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlByb2R1Y3QuTGlzdCIsIm5iZiI6MTcwODQyOTM4MSwiZXhwIjoxNzA4NDI5OTc4LCJpc3MiOiJ3d3cubWVsaWguY29tIiwiYXVkIjoid3d3Lm1lbGloLmNvbSJ9.6ZcMwXTz22iAUwxHtkv0sxwvFx-gmpLIEuPHGed92eg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"id\":1017,\r\n  \"title\": \"helehele\",\r\n  \"description\": \"a1312313sd\",\r\n  \"stockQuantity\": 500,\r\n  \"category\": {\r\n    \"categoryId\": 2,\r\n    \"name\": \"bilgisayar\",\r\n    \"minimumStockQuantity\": 100\r\n  },\r\n  \"isLive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}Products/update",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products-add",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGloa2FocmFtYW40QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNZWxpaCBLYWhyYW1hbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlByb2R1Y3QuTGlzdCIsIm5iZiI6MTcwODQyOTM4MSwiZXhwIjoxNzA4NDI5OTc4LCJpc3MiOiJ3d3cubWVsaWguY29tIiwiYXVkIjoid3d3Lm1lbGloLmNvbSJ9.6ZcMwXTz22iAUwxHtkv0sxwvFx-gmpLIEuPHGed92eg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"title\": \"123124124214123\",\r\n  \"description\": \"a1312313sd\",\r\n  \"stockQuantity\": 500,\r\n  \"category\": {\r\n    \"categoryId\": 2,\r\n    \"name\": \"bilgisayar\",\r\n    \"minimumStockQuantity\": 100\r\n  },\r\n  \"isLive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}Products/add",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products-getbyid",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "productId",
+								"value": "4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}Products/getbyid?productId=1",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"getbyid"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products-getlistbycategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Products/getlistbycategory?categoryId=80",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"getlistbycategory"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "80"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Productsgetall",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Products/getall",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"getall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products-searchProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Products/searchProducts?searchKeyword=melihkah",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"searchProducts"
+							],
+							"query": [
+								{
+									"key": "searchKeyword",
+									"value": "melihkah"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products-getProductsByStockRange",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Products/getProductsByStockRange?min=10&max=15",
+							"host": [
+								"{{baseUrl}}Products"
+							],
+							"path": [
+								"getProductsByStockRange"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "10"
+								},
+								{
+									"key": "max",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Category-getall",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}Category/getall",
+							"host": [
+								"{{baseUrl}}Category"
+							],
+							"path": [
+								"getall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category-getbyid",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "productId",
+								"value": "4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}Category/getbyid?categoryId=1004",
+							"host": [
+								"{{baseUrl}}Category"
+							],
+							"path": [
+								"getbyid"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "1004"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category-add",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGloa2FocmFtYW40QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNZWxpaCBLYWhyYW1hbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlByb2R1Y3QuTGlzdCIsIm5iZiI6MTcwODQyOTM4MSwiZXhwIjoxNzA4NDI5OTc4LCJpc3MiOiJ3d3cubWVsaWguY29tIiwiYXVkIjoid3d3Lm1lbGloLmNvbSJ9.6ZcMwXTz22iAUwxHtkv0sxwvFx-gmpLIEuPHGed92eg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test23\",\r\n  \"minimumStockQuantity\": 3000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}Category/add",
+							"host": [
+								"{{baseUrl}}Category"
+							],
+							"path": [
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category-update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGloa2FocmFtYW40QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNZWxpaCBLYWhyYW1hbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlByb2R1Y3QuTGlzdCIsIm5iZiI6MTcwODQyOTM4MSwiZXhwIjoxNzA4NDI5OTc4LCJpc3MiOiJ3d3cubWVsaWguY29tIiwiYXVkIjoid3d3Lm1lbGloLmNvbSJ9.6ZcMwXTz22iAUwxHtkv0sxwvFx-gmpLIEuPHGed92eg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoryId\": 1004,\r\n  \"name\": \"update\",\r\n  \"minimumStockQuantity\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}Category/update",
+							"host": [
+								"{{baseUrl}}Category"
+							],
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category-delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGloa2FocmFtYW40QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNZWxpaCBLYWhyYW1hbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlByb2R1Y3QuTGlzdCIsIm5iZiI6MTcwODQyOTM4MSwiZXhwIjoxNzA4NDI5OTc4LCJpc3MiOiJ3d3cubWVsaWguY29tIiwiYXVkIjoid3d3Lm1lbGloLmNvbSJ9.6ZcMwXTz22iAUwxHtkv0sxwvFx-gmpLIEuPHGed92eg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoryId\": 1005,\r\n  \"name\": \"asd\",\r\n  \"minimumStockQuantity\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}Category/delete",
+							"host": [
+								"{{baseUrl}}Category"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"var baseurl = \"http://localhost:5240/api/\"\r",
+					"pm.environment.set(\"baseUrl\",baseurl);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
