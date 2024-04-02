@@ -18,5 +18,20 @@ namespace Entities.Concrete
 
         public bool IsLive { get; set; } = false; 
 
+
+        public Product(Product product)
+        {
+            Id = product.Id;
+            Title = product.Title;
+            Description = product.Description;
+            StockQuantity = product.StockQuantity;
+            CategoryId = product.CategoryId;
+            IsLive = product.IsLive;
+        }
+
+        public Product()
+        {
+
+        }
     }
 }

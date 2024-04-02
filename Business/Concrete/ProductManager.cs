@@ -35,7 +35,7 @@ namespace Business.Concrete
             if (product.CategoryId != null)
             {
                 var _category = _categoryService.GetById((int)product.CategoryId);
-                if (_category != null )
+                if (_category.Data != null )
                 { 
                     if(_category.Data.MinimumStockQuantity <= product.StockQuantity)
                     {

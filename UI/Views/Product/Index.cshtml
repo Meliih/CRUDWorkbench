@@ -4,23 +4,90 @@
 @{
     ViewData["Title"] = "Ürün Listesi";
 }
+<div class="d-flex justify-content-between align-items-center">
+    <h2 class="mb-0">Ürün Listesi</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">Ürün Ekle</button>
+</div>
 
-<h2>Ürün Listesi</h2>
+<br />
 
-<form asp-action="SearchProducts" asp-controller="Product" method="get" class="input-group">
-    <input type="text" name="searchKeyword" class="form-control" placeholder="Ürün ara...">
-    <div class="input-group-append">
-        <button type="submit" class="btn btn-outline-secondary">Ara</button>
+@if (ViewBag.Categories != null)
+{
+
+    <form method="post"asp-action="AddProduct" asp-controller="Product"  >
+        <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel">Ürün Ekle</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title">Başlık:</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Açıklama:</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="stockQuantity">Stok Miktarı:</label>
+                            <input type="number" class="form-control" id="stockQuantity" name="stockQuantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryId">Kategoriler:</label>
+                            <select class="form-control" id="categoryId" name="categoryId" required>
+                                @foreach (var category in ViewBag.Categories as List<Category>)
+                                {
+                                    <option value="@category.CategoryId">@category.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        <button type="submit"  class="btn btn-primary">Ürün Ekle</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </form>
+}
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.SuccessMessage
     </div>
-</form>
+}
 
-<form asp-action="GetProductsByStockRange" asp-controller="Product" method="get" class="input-group">
-    <input type="number" name="min" class="form-control" placeholder="Minimum stok">
-    <input type="number" name="max" class="form-control" placeholder="Maksimum stok">
-    <div class="input-group-append">
-        <button type="submit" class="btn btn-outline-secondary">Ara</button>
+
+<div>
+    <form asp-action="SearchProducts" asp-controller="Product" method="get" class="input-group">
+        <input type="text" name="searchKeyword" class="form-control" placeholder="Ürün ara...">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-secondary">Ara</button>
+        </div>
+    </form>
+    <div>
+        <br />
     </div>
-</form>
+    <form asp-action="GetProductsByStockRange" asp-controller="Product" method="get" class="input-group">
+        <input type="number" name="min" class="form-control" placeholder="Minimum stok">
+        <input type="number" name="max" class="form-control" placeholder="Maksimum stok">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-secondary">Ara</button>
+        </div>
+    </form>
+
+</div>
+
 
 
 
@@ -65,7 +132,86 @@
 
 <script>
 
-    
+    function addProduct() {
+   
+        var title = document.getElementById('title').value;
+        var description = document.getElementById('description').value;
+        var stockQuantity = document.getElementById('stockQuantity').value;
+        var category = document.getElementById('categories').value;
+
+        var product = {
+            title: title,
+            description: description,
+            stockQuantity: stockQuantity,
+            category: category
+        };
+
+       
+        $.ajax({
+            url: '/Products/AddProduct', 
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(product),
+            success: function (response) {
+                
+                console.log('Ürün başarıyla eklendi:', response);
+                
+            },
+            error: function (xhr, status, error) {
+                
+                console.error('Ürün eklenirken bir hata oluştu:', error);
+            }
+        });
+    }
+
+    // Get the modal
+    var modal = document.getElementById("productModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("addProductButton");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Handle form submission
+    document.getElementById("productForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Retrieve form values
+        var title = document.getElementById("title").value;
+        var description = document.getElementById("description").value;
+        var stockQuantity = document.getElementById("stockQuantity").value;
+        var categories = document.getElementById("categories").value;
+
+        // You can now use these values to do whatever you need, like sending them to a server, etc.
+
+        // For demonstration, let's just log the values to the console
+        console.log("Title:", title);
+        console.log("Description:", description);
+        console.log("Stock Quantity:", stockQuantity);
+        console.log("Categories:", categories);
+
+        // Close the modal
+        modal.style.display = "none";
+    });
+
     
     $(document).ready(function () {
         $('#searchForm').submit(function (event) {
@@ -92,7 +238,15 @@
             });
         });
     });
+    <!-- jQuery -->
 
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 

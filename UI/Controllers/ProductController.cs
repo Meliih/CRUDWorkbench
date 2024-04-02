@@ -22,10 +22,24 @@ namespace UI.Controllers
             var categories = _categoryService.GetList();
 
             ViewBag.Categories = categories.Data;
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
 
             return View(response.Data);
         }
 
+        [HttpPost]
+        public IActionResult AddProduct(ProductDTO product)
+        {
+            var response = new Product();
+            response.Title = product.Title;
+            response.Description = product.Description;
+            response.StockQuantity = product.StockQuantity;
+            response.CategoryId = product.CategoryId;
+            _productService.Add(response);
+            TempData["SuccessMessage"] = "Ürün başarıyla eklendi.";
+
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public IActionResult Delete(Product product)
         {
