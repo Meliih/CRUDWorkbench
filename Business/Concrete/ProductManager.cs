@@ -66,6 +66,21 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<Product>(Messages.NoProduct);
             }
+            var _category = _categoryService.GetById((int)product.CategoryId);
+            if (_category.Data != null)
+            {
+                if (_category.Data.MinimumStockQuantity <= product.StockQuantity)
+                {
+                    product.IsLive = true;
+                    _productDal.Update(product);
+                    return new SuccessResult(Messages.ProductUpdated);
+                }             
+            }
+            else
+            {
+                return new ErrorResult(Messages.NoCategory);
+            }
+
             _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
         }
