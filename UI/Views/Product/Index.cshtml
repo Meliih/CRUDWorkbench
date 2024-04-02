@@ -104,25 +104,80 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var product in Model)
-    {
-        <tr>
-            <td>@product.Id</td>
-            <td>@product.Title</td>
-            <td>@product.Description</td>
-            <td>@product.StockQuantity</td>
-            <td>@product.Name</td>
-            <td>@(product.IsLive ? "Evet" : "Hayır")</td>
-   
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@product.StockQuantity</td>
+                <td>@product.Name</td>
+                <td>@(product.IsLive ? "Evet" : "Hayır")</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProductModal-@product.Id">Düzenle</button>
+                    <!-- Düzenleme Modalı -->
+                    <form method="post" asp-action="Edit" asp-controller="Product" id="editProductForm-@product.Id">
+                        <div class="modal fade" id="editProductModal-@product.Id" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editProductModalLabel">Ürün Düzenle</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                            <!-- Düzenleme için gerekli inputlar buraya gelecek -->
+                                            
+                                            <input type="hidden" id ="productId" name="productId" value="@product.Id" />
+                                            <div class="form-group">
+                                                <label for="editProductTitle">Ürün Adı</label>
+                                                <input type="text" class="form-control" id="editProductTitle-@product.Id" name="editProductTitle" value="@product.Title" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editProductDescription">Açıklama</label>
+                                                <input type="text" class="form-control" id="editProductDescription-@product.Id" name="editProductDescription" value="@product.Description" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editProductStockQuantity">Stok Miktarı</label>
+                                                <input type="number" class="form-control" id="editProductStockQuantity-@product.Id" name="editProductStockQuantity" value="@product.StockQuantity" />
+                                            </div>                                
+                                            <div class="form-group">
+                                                <label for="editProductCategory">Kategori</label>
+                                                <select class="form-control" id="editProductCategory-@product.Id" name="editProductCategory">
 
+                                                    @if (ViewBag.Categories != null)
+                                                    {
+                                                        @foreach (var category in ViewBag.Categories as List<Category>)
+                                                        {
+                                                            <option value="@category.CategoryId">@category.Name</option>
+                                                        } 
+                                                    }
+                                                
+                                                </select>
+                                            </div>
+                                            <!-- Diğer inputlar buraya eklenebilir -->
+                                       
+                                    </div>
 
-            <td>
-                <form asp-action="Delete" asp-route-id="@product.Id" method="post" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
-                    <button type="submit" class="btn btn-danger">Sil</button>
-                </form>
-            </td>
-        </tr>
-    }
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                                        <button type="submit" class="btn btn-primary" >Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@product.Id" method="post" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
     </tbody>
 </table>
 

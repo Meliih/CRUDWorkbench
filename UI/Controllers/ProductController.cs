@@ -58,9 +58,15 @@ namespace UI.Controllers
 
        
         [HttpPost]
-        public IActionResult Edit(ProductDTO product)
+        public IActionResult Edit( int productId, string editProductTitle, string editProductDescription,int editProductStockQuantity,int editProductCategory)
         {
-            Console.WriteLine(product.Id);
+            var response = new Product();
+            response.Id = productId;
+            response.Title = editProductTitle;
+            response.Description = editProductDescription;
+            response.StockQuantity = editProductStockQuantity;
+            response.CategoryId = editProductCategory;
+            _productService.Update(response);
             return RedirectToAction("Index");
         }
 
